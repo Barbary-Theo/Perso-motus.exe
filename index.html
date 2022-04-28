@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 🔴 Motus 🟡 </title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <script>
+
+        motus = {
+            store: null,
+            helper: null,
+            display: null,
+            handle: null
+        }
+
+
+        /* -------------------- Init Store -------------------- */
+
+        motus.store = {
+            allWords: ['NIGGER', 'ABEILLE', 'ABRICOT', 'ACROBATE', 'ACTEUR', 'AEROPORT', 'AGNEAU', 'AIGLE', 'AIGUILLE', 'ALBERT', 'ALICE', 'ALLUMETTE', 'AMAZONE', 'AMBULANCE', 'AMPOULE', 'ANANAS', 'ANIMAL', 'ANUBIS', 'APHRODITE', 'APICULTEUR', 'APOLLON', 'APPAREIL', 'APPAREIL', 'AQUARIUM', 'ARAIGNEE', 'ARBRE', 'ARCHITECTE', 'ARETE', 'ARGENT', 'ARROSOIR', 'ARTEMIS', 'ASCENSEUR', 'ASPERGE', 'ASPIRATEUR', 'ASPIRINE', 'ASSIETTE', 'ASTERIX', 'ASTRONAUTE', 'ASTRONOMIE', 'ATHENA', 'ATTERRIR', 'AUBERGINE', 'AUTOMNE', 'AUTRUCHE', 'AVION', 'BAGUE', 'BAGUETTE', 'BAILLER', 'BALAI', 'BALANCOIRE', 'BALEINE', 'BALEINE', 'BALLE', 'BALLON', 'BANANE', 'BANDE', 'BARBE', 'BARQUE', 'BARRETTE', 'BASKET', 'BATEAU', 'BATON', 'BAVOIR', 'BEQUILLE', 'BERGER', 'BERGER', 'BERMUDA', 'BEURRE', 'BIBERON', 'BIFTECK', 'BIJOU', 'BIJOUTIER', 'BILLE', 'BILLET', 'BIOLOGIE', 'BISCUIT', 'BISON', 'BOISSON', 'BONBON', 'BONNET', 'BOOMERANG', 'BOTTE', 'BOUCHE', 'BOUCHER', 'BOUCHERIE', 'BOUCHON', 'BOUEE', 'BOULANGER', 'BOUTEILLE', 'BOUTON', 'BRACELET', 'BRETELLE', 'BROCOLI', 'BROSSE', 'BROUETTE', 'BUREAU', 'CABANE', 'CADEAU', 'CADENAS', 'CAFETIERE', 'CAGOULE', 'CAILLOU', 'CALCULETTE', 'CALENDRIER', 'CAMELEON', 'CAMERA', 'CAMION', 'CAMPING', 'CANAPE', 'CANARD', 'CANICHE', 'CANNE', 'CARAVANE', 'CARNAVAL', 'CAROTTE', 'CARTABLE', 'CASQUE', 'CASQUETTE', 'CASSEROLE', 'CASTOR', 'CEINTURE', 'CENDRILLON', 'CENTAURE', 'CERBERE', 'CERCEAU', 'CEREALE', 'CERISE', 'CERVEAU', 'CHAISE', 'CHAMEAU', 'CHAMPIGNON', 'CHANDELEUR', 'CHANTER', 'CHANTEUR', 'CHAPEAU', 'CHARIOT', 'CHASSEUR', 'CHATAIGNE', 'CHATEAU', 'CHATON', 'CHAUSSETTE', 'CHAUSSON', 'CHAUSSURE', 'CHAUVE', 'CHEMISE', 'CHENILLE', 'CHERCHEUR', 'CHEVAL', 'CHEVAL', 'CHEVALIERS', 'CHEVEU', 'CHEVILLE', 'CHEVRE', 'CHIEN', 'CHIFFON', 'CHIOT', 'CHIPS', 'CHIRURGIEN', 'CHOCOLAT', 'CHOUETTE', 'CHRISTOPHE', 'CHUCHOTER', 'CIGOGNE', 'CISEAUX', 'CITRON', 'CITROUILLE', 'CLEMENTINE', 'CLEOPATRE', 'CLIGNOTANT', 'CLOWN', 'COCCINELLE', 'COCHON', 'COCOTTE', 'COFFRE', 'COIFFEUR', 'COLLANT', 'COLLE', 'COLLIER', 'COLORIER', 'CONCOMBRE', 'CONDUIRE', 'CONFITURE', 'CONSOLE', 'COQUELICOT', 'COQUILLAGE', 'CORBEAU', 'CORBEILLE', 'CORDE', 'COUDE', 'COUDRE', 'COUETTE', 'COURONNE', 'COUSSIN', 'COUTEAU', 'COUVER', 'COUVERCLE', 'COUVERTURE', 'CRABE', 'CRACHER', 'CRAIE', 'CRAPAUD', 'CRAVATE', 'CRAYON', 'CRECHE', 'CREME', 'CREPE', 'CREUSER', 'CREVETTE', 'CROCHET', 'CROCODILE', 'CROISSANT', 'CRONOS', 'CROÛTE', 'CUILLERE', 'CUISINIER', 'CUISSE', 'CULOTTE', 'CYCLISME', 'CYCLOPE', 'CYGNE', 'DANSER', 'DAUPHIN', 'DECHIRER', 'DENTIFRICE', 'DENTISTE', 'DESSERT', 'DIAMANT', 'DIANE', 'DINDON', 'DÎNETTE', 'DINOSAURE', 'DIONYSOS', 'DOIGT', 'DOMINO', 'DOMPTEUR', 'DONALD', 'DORMIR', 'DRAGON', 'DROMADAIRE', 'ECHARPE', 'ECHASSE', 'ECHECS', 'ECHELLE', 'ECOLE', 'ECOLE', 'ECRAN', 'ECRIRE', 'ECUREUIL', 'EGYPTE', 'ELASTIQUE', 'ELEPHANT', 'EMPIRE', 'ENDIVE', 'ENTONNOIR', 'ENVELOPPE', 'EPAULE', 'EPINGLE', 'EPIPHANIE', 'EPONGE', 'ESCALIER', 'ESCARGOT', 'ESCRIME', 'ESPAGNE', 'ESSENCE', 'ETATS', 'ETOILE', 'ETOILE', 'ETOILE', 'EVEREST', 'FACTEUR', 'FANTOME', 'FARINE', 'FAUTEUIL', 'FAUTEUIL', 'FERME', 'FESSE', 'FEUTRE', 'FICELLE', 'FIEVRE', 'FILLE', 'FLAMANT', 'FLEUR', 'FLEURISTE', 'FLÛTE', 'FOOTBALL', 'FORGERON', 'FOSSILE', 'FOURCHETTE', 'FOURMI', 'FRAISE', 'FRAMBOISE', 'FRANCE', 'FREIN', 'FRISBEE', 'FRITES', 'FROMAGE', 'FRONT', 'FRUIT', 'FUSEE', 'FUSEE', 'GALERE', 'GALETTE', 'GANDHI', 'GARAGE', 'GARÇON', 'GARDIEN', 'GARGAMEL', 'GATEAU', 'GAULOIS', 'GEANT', 'GENOU', 'GEOLOGIE', 'GIRAFE', 'GLAÇON', 'GOBELET', 'GOMME', 'GORILLE', 'GRANDE', 'GRECE', 'GRENOUILLE', 'GRIFFE', 'GROSEILLE', 'GROTTE', 'GRUYERE', 'GUEPARD', 'GUEPE', 'GUIRLANDE', 'GYMNASE', 'HADES', 'HALLOWEEN', 'HAMSTER', 'HANDBALL', 'HARICOT', 'HERACLES', 'HERBE', 'HERISSON', 'HERMES', 'HIBOU', 'HIPPOCAMPE', 'HIRONDELLE', 'HIVER', 'HOCKEY', 'HOPITAL', 'HOQUET', 'HORLOGE', 'HORUS', 'HOTEL', 'HUILE', 'HUSKY', 'ICARE', 'IDEFIX', 'IMPRIMANTE', 'INFIRMIER', 'INSECTE', 'ITALIE', 'JAMBE', 'JAMBON', 'JAPON', 'JEANNE', 'JONGLER', 'JONGLEUR', 'JOURNEE', 'JUMELLES', 'JUMENT', 'KANGOUROU', 'KARATE', 'KETCHUP', 'LACET', 'LANCER', 'LANGUE', 'LAPIN', 'LARME', 'LEOPARD', 'LEVRE', 'LEVRES', 'LEZARD', 'LIBELLULE', 'LIBRAIRE', 'LICORNE', 'LIEVRE', 'LIMACE', 'LIVRE', 'LOUCHE', 'LOUPE', 'LUCKY', 'LUNETTES', 'LUNETTES', 'LUTIN', 'MAÇON', 'MAGICIEN', 'MAILLOT', 'MAILLOT', 'MAISON', 'MANEGE', 'MANTE', 'MANTEAU', 'MARGUERITE', 'MARIE', 'MARIN', 'MARMOTTE', 'MARTEAU', 'MEDECIN', 'MEDECINE', 'MEDICAMENT', 'MEDUSE', 'MELON', 'MENTON', 'MERLIN', 'METAL', 'METEORITE', 'METRO', 'MEXIQUE', 'MICKEY', 'MICROSCOPE', 'MILLE', 'MILOU', 'MINNIE', 'MINOTAURE', 'MIROIR', 'MOINEAU', 'MONSTRE', 'MONTAGNE', 'MONTRE', 'MORSE', 'MOTEUR', 'MOUCHE', 'MOUCHOIR', 'MOUETTE', 'MOUFLE', 'MOULE', 'MOULIN', 'MOUSTACHE', 'MOUSTIQUE', 'MOUTARDE', 'MOUTON', 'MUSIQUE', 'NAGER', 'NAPPE', 'NASIQUE', 'NAVET', 'NOISETTE', 'NOMBRIL', 'NOUVEL', 'NOYAU', 'OBELIX', 'OIGNON', 'OISEAU', 'OLIVE', 'ONGLE', 'OPTICIEN', 'ORANGE', 'ORDINATEUR', 'ORDONNANCE', 'OREILLE', 'OREILLER', 'ORQUE', 'ORTEIL', 'OTARIE', 'OURSIN', 'OUVRE', 'OUVRIER', 'PAILLE', 'PALAIS', 'PANDA', 'PANSEMENT', 'PANTALON', 'PANTHERE', 'PAPIER', 'PAPILLON', 'PARAPLUIE', 'PARASOL', 'PARIS', 'PATES', 'PATISSERIE', 'PATTE', 'PECHE', 'PECHEUR', 'PEDALE', 'PEGASE', 'PEIGNE', 'PELICAN', 'PELLE', 'PELUCHE', 'PERCEUSE', 'PERLE', 'PERROQUET', 'PERSIL', 'PETANQUE', 'PETIT', 'PHARMACIE', 'PHENIX', 'PHOQUE', 'PIANO', 'PICSOU', 'PIEUVRE', 'PIGEON', 'PINCEAU', 'PINOCCHIO', 'PIQUER', 'PIQÛRE', 'PIZZA', 'PLANCHE', 'PLANCHE', 'PLASTIQUE', 'PLATRE', 'PLEURER', 'PLOMBIER', 'PLUME', 'POELE', 'POIGNET', 'POING', 'POIRE', 'POIREAU', 'POISON', 'POISSON', 'POLICE', 'POMME', 'POMME', 'POMPIER', 'PONEY', 'POPCORN', 'PORTE', 'POSEIDON', 'POUBELLE', 'POUCE', 'POULAIN', 'POULE', 'POULET', 'POUMON', 'POUPEE', 'POUSSETTE', 'POUSSIN', 'PRINCE', 'PRINCESSE', 'PRINTEMPS', 'PROMETHEE', 'PRUNE', 'PUISSANCE', 'PUREE', 'PUTOIS', 'PUZZLE', 'PYJAMA', 'PYRAMIDES', 'QUEUE', 'RACLETTE', 'RADIATEUR', 'RADIO', 'RADIS', 'RAISIN', 'RANTANPLAN', 'RAQUETTE', 'RASOIR', 'RATEAU', 'RATON', 'RECETTE', 'REINE', 'RENARD', 'REQUIN', 'RESTAURANT', 'REVEIL', 'REVER', 'RHINOCEROS', 'RIDEAU', 'ROBINET', 'ROBINSON', 'ROBOT', 'ROUGE', 'ROULEAU', 'SABLE', 'SAINT', 'SALADE', 'SALADE', 'SALADIER', 'SALIERE', 'SANGLIER', 'SAPIN', 'SARDINE', 'SATYRE', 'SAUMON', 'SAVON', 'SCIENCE', 'SCOOTER', 'SCORPION', 'SERPENT', 'SERPENT', 'SERRURE', 'SERVIETTE', 'SHAMPOOING', 'SHERLOCK', 'SHIVA', 'SINGE', 'SIRENE', 'SOLEIL', 'SONNETTE', 'SORCIERE', 'SOUCOUPE', 'SOUPE', 'SOURCIL', 'SOURIS', 'SPHINX', 'SQUELETTE', 'STATUE', 'STYLO', 'SUCRE', 'SUPERMAN', 'TABLE', 'TABLEAU', 'TABLETTE', 'TABLIER', 'TAILLE', 'TALON', 'TAMBOUR', 'TANDEM', 'TAPIS', 'TAPIS', 'TARTE', 'TARTINE', 'TASSE', 'TAUPE', 'TAUREAU', 'TELEPHONE', 'TELEPHONE', 'TELEVISION', 'TENNIS', 'TENTE', 'TETER', 'TIGRE', 'TIMBRE', 'TIROIR', 'TOBOGGAN', 'TOMATE', 'TORCHON', 'TORTUE', 'TOURNEVIS', 'TOUTATIS', 'TRACTEUR', 'TRAIN', 'TRAÎNEAU', 'TRAMPOLINE', 'TRESOR', 'TRICYCLE', 'TROMPETTE', 'TRONE', 'TROUSSE', 'TRUIE', 'TUYAU', 'ULYSSE', 'UNIVERS', 'URINE', 'USINE', 'VACHE', 'VALISE', 'VALKYRIE', 'VAMPIRE', 'VAUTOUR', 'VENISE', 'VENTRE', 'VERRE', 'VIANDE', 'VIKINGS', 'VISAGE', 'VOILE', 'VOITURE', 'VOLCAN', 'VOLET', 'XYLOPHONE', 'YAHOURT', 'ZEBRE', 'ZOMBIE'],
+            wordChosen: 'Petit tricheur 🤪',
+            jTarget: 0,
+            iTarget: 0,
+            lettersValidity: [],
+            wordsTried: [],
+            wordFindPercent: 0,
+            nbEnter: 0
+
+        }
+
+
+        /* -------------------- Init Helper -------------------- */
+
+        motus.helper = {
+            getRandomInt: (max) => {
+                return Math.floor(Math.random() * max);
+            },
+
+            sleep: (ms) => {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            },
+
+            reloadPage: () => {
+                location.reload();
+            },
+
+            showAlert: () => {
+                $("#alertMsg").show();
+            },
+
+            closeAlert: () => {
+                $("#alertMsg").hide();
+            },
+
+            removeOneLetter: (word, letter) => {
+                let wordToReturn = '';
+                let nbRemove = 0;
+
+                for(let i = 0 ; i < word.length ; i ++) {
+                    if( word[i] === letter && nbRemove < 1) {
+                        nbRemove ++;
+                    }
+                    else {
+                        wordToReturn += word[i];
+                    }
+                }
+
+                return wordToReturn;
+            }
+
+        }
+
+
+        /* -------------------- Init Display -------------------- */
+
+        motus.display = {
+            initGrid: (wordChosen) => {
+
+                let grid = $("#grid");
+                grid.css("grid-template-columns", "repeat(${length}, 1fr)");
+                let elementToAdd = ``;
+                let length = wordChosen.length
+
+                for(let i = 0 ; i < 6 ; i++) {
+
+                    elementToAdd = `<div class="row">`;
+                    for(let j = 0 ; j < length ; j++) {
+                        elementToAdd += `<div id="i${i}j${j}" class="unknown case"></div>`
+
+                    }
+                    elementToAdd += `</div>`;
+                    grid.append(elementToAdd);
+
+                }
+                $(".case").each(function(index, item) {
+                    let selector = $("#"+item.id);
+                    selector.css("height", selector.width())
+                })
+
+            },
+
+            verifyWord: async (wordChosen) => {
+                let wordIndicated = "";
+                let letter;
+                let preventDoublon = wordChosen
+
+                for (let j = 0; j < wordChosen.length; j++) {
+                    letter = $("#i" + motus.store.iTarget + "j" + j).text();
+
+                    preventDoublon = motus.display.verifyLetter(wordChosen, letter, j, preventDoublon);
+                    await motus.helper.sleep(300);
+
+                    wordIndicated += letter;
+                }
+
+                motus.store.wordsTried.push(wordIndicated);
+
+            },
+
+            verifyLetter: (wordChosen, letter, j, preventDoublon) => {
+                let selector = $("#i"+motus.store.iTarget+"j"+j);
+
+                if(wordChosen[j] === letter){
+
+                    selector.addClass("find");
+                    selector.removeClass("unknown");
+                    motus.store.lettersValidity[j] = true;
+
+                    preventDoublon = motus.helper.removeOneLetter(preventDoublon, letter);
+                }
+                else if(wordChosen.includes(letter)) {
+                    motus.store.lettersValidity[j] = false
+
+                    if(preventDoublon.includes(letter)) {
+                        selector.addClass("nice");
+                        selector.removeClass("unknown");
+                        preventDoublon = motus.helper.removeOneLetter(preventDoublon, letter);
+                    }
+                }
+                else {
+                    motus.store.lettersValidity[j] = false
+                }
+
+                return preventDoublon;
+            }
+        }
+
+
+        /* -------------------- Init Handle -------------------- */
+
+        motus.handle = {
+            insertValue: (code) => {
+                let selector = $("#i"+motus.store.iTarget+"j"+motus.store.jTarget)
+                selector.text(String.fromCharCode(code).toLocaleUpperCase());
+                selector.removeClass("caseSelected")
+                $("#i"+motus.store.iTarget+"j"+(motus.store.jTarget+1)).addClass("caseSelected")
+                motus.store.jTarget += 1;
+            },
+
+            deleteValue: (wordChosen) => {
+                let selector = $("#i"+motus.store.iTarget+"j"+motus.store.jTarget);
+                selector.text("");
+                selector.removeClass("caseSelected")
+                $("#i"+motus.store.iTarget+"j"+(motus.store.jTarget-1)).addClass("caseSelected")
+                if(motus.store.jTarget === wordChosen.length+1){
+                    motus.store.jTarget -= 2;
+                }
+                else if(motus.store.jTarget !== 0) {
+                    motus.store.jTarget -= 1;
+                }
+            },
+
+            valideWord: async (wordChosen) => {
+                if(motus.store.jTarget >= wordChosen.length) {
+                    await motus.display.verifyWord(wordChosen);
+                    motus.store.iTarget += 1;
+                    motus.store.jTarget = 0;
+
+                    // verify if the word indicated correspond to the word guessed
+                    if(!motus.store.lettersValidity.includes(false)) {
+                        // open modal victory
+                        $("#modalVictory").modal("show");
+                    }
+                    else if(motus.store.iTarget >= 6){
+                        $("#wordChosenWas").text("Le mot était " + wordChosen);
+                        $("#modalLose").modal("show");
+                    }
+
+                    else if(motus.store.iTarget === 5){
+                        motus.helper.showAlert();
+                    }
+
+                    $("#i"+motus.store.iTarget+"j"+motus.store.jTarget).addClass("caseSelected");
+
+                    motus.handle.updateProgressBar(wordChosen);
+                    motus.store.nbEnter = 0;
+                }
+
+            },
+
+            updateProgressBar: (wordChosen) => {
+                let progressBar = $("#progressBar");
+                let currentNbTrue = Math.round(motus.store.lettersValidity.filter(item => item === true).length / motus.store.lettersValidity.length * 100);
+
+                if(currentNbTrue <= motus.store.wordFindPercent) {
+                    currentNbTrue = motus.store.wordFindPercent;
+                }
+
+                progressBar.text(currentNbTrue+'%');
+                progressBar.css("width", `${currentNbTrue}%`)
+
+                motus.store.wordFindPercent = currentNbTrue
+            }
+        }
+
+
+        /* -------------------- Initialize Screen -------------------- */
+
+        $(document).ready(function() {
+
+            let wordChosen = motus.store.allWords[motus.helper.getRandomInt(motus.store.allWords.length - 1)]
+
+            for (let i = 0 ; i < wordChosen.length ; i ++ ){
+                motus.store.lettersValidity.push(false)
+            }
+
+            motus.display.initGrid(wordChosen);
+
+
+            $(document).keyup(function(e) {
+                let code = (e.keyCode ? e.keyCode : e.which);
+
+                if(code === 8) {
+                    if(motus.store.jTarget >= 0) {
+                        motus.handle.deleteValue(wordChosen);
+                    }
+                }
+
+            });
+
+            $(document).keydown(function(e) {
+
+                let code = (e.keyCode ? e.keyCode : e.which);
+
+                if(code === 13 && motus.store.nbEnter === 0) {
+                    motus.store.nbEnter += 1;
+                    motus.handle.valideWord(wordChosen);
+                }
+                else if(code >= 65 && code <= 90) {
+
+                    if(motus.store.jTarget < wordChosen.length) {
+                        motus.handle.insertValue(code, wordChosen);
+                    }
+
+                }
+            });
+
+            $("#i"+motus.store.iTarget+"j"+motus.store.jTarget).addClass("caseSelected")
+
+            $("#playAgain").click(motus.helper.reloadPage);
+            $("#playAgain2").click(motus.helper.reloadPage);
+            $("#alertClose").click(motus.helper.closeAlert);
+            $("#openHelper").click(function() { $("#helperModal").modal("show")});
+            $("#closeHelper").click(function() {$("#helperModal").modal("hide")});
+
+            motus.helper.closeAlert();
+
+
+        })
+
+    </script>
+
+    <style>
+
+        body {
+            background-color: white;
+        }
+
+        .title {
+            margin-top: 1%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 55px;
+        }
+
+        .case {
+            border: 1px solid grey;
+            font-size: 30px;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            margin: 3px;
+        }
+
+        .caseSelected {
+            transform: scale(1.2);
+        }
+
+        .find {
+            background-color: #E60A0A;
+            color: white;
+        }
+
+        .nice {
+            background-color: #EED803;
+            border-radius: 25px;
+            color: white;
+        }
+
+        .unknown {
+            background-color: #F9F9F9;
+        }
+
+        .grid {
+            margin-top: 4%;
+            display: grid;
+            grid-gap: 5px;
+            text-align: center;
+            justify-content: center;
+        }
+
+        #alertMsg {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            border: 1px solid grey;
+            height: 70px;
+            width: 400px;
+            border-radius: 5px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+
+        .alertText {
+            margin-top: 5%;
+            text-align: center;
+        }
+
+        #alertClose {
+            position: fixed;
+            right: 30px;
+        }
+
+        .textProgress {
+            text-align: center;
+            margin-top: 7%;
+        }
+
+        .helperButton {
+            position: absolute;
+            margin-left: 10px;
+            margin-top: 10px;
+            border-radius: 20px;
+            border: 1px solid black;
+            background-color: white;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <button id="openHelper" class="helperButton"> ? </button>
+
+    <h1 class="title"> Amuse toi bien </h1>
+
+    <hr/>
+
+
+    <div id="grid" class="container-fluid grid col-sm-8 offset-2">
+
+    </div>
+
+    <div class="textProgress"> Mot trouvé à : </div>
+
+
+
+    <div class="progress" style="width: 70%; margin: auto;">
+        <div id="progressBar" class="progress-bar bg-danger" role="progressbar" style="width: 0;"  aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="modalVictory" role="dialog"
+         aria-labelledby="myModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-md" style="margin-top: 20%">
+            <div class="modal-content">
+                <div class="modal-header" style="justify-content: center">
+
+                    <h1> Bah gg c'était ça </h1>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="row" style="font-size: 26px">
+                        <div class="col-sm-6 offset-3">
+                            <button id="playAgain" class="btn btn-primary">🟡 Un nouveau mot stp ‍🔴</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalLose" role="dialog"
+         aria-labelledby="myModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-md" style="margin-top: 20%">
+            <div class="modal-content">
+                <div class="modal-header"  style="justify-content: center !important;">
+
+                    <h1> Tant pis </h1>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="row" style="font-size: 26px; text-align: center;">
+                        <div id="wordChosenWas" class="col-sm-10 offset-1">
+                            text
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer" style="justify-content: center !important;">
+                    <div>
+                        <button id="playAgain2" class="btn btn-primary">🟡 Un nouveau mot stp ‍🔴</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="alertMsg">
+        <div id="alertClose">&#10006</div>
+        <div class="alertText">
+            Plus qu'une chance attention 😉
+        </div>
+    </div>
+
+    <div class="modal fade" id="helperModal" role="dialog"
+         aria-labelledby="myModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-md" style="margin-top: 15%">
+            <div class="modal-content">
+                <div class="modal-header" style="justify-content: center">
+
+                    <h3 style="color: #C02828"> Ah, en plus t'as des questions </h3>
+
+                </div>
+                <div class="modal-body">
+
+                    <div class="row" style="font-size: 20px; text-align: center">
+                        <ul>
+                            <li> C'est dommage que j'ai pas trouvé un dictionnaire assez complet, du coup même si vous mettez n'importe quoi bah ça va corriger </li>
+                            <li> Sinon bah tu connais les règles de Motus </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer" style="justify-content: center !important;">
+                    <button class="btn btn-danger col-sm-4" id="closeHelper"> Fermer </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
